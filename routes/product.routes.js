@@ -12,7 +12,7 @@ const product = {
     },
   },
 };
-const getPoductSchemas = {
+const getProductSchemas = {
   schema: {
     tags:['Products'],
     response: {
@@ -25,7 +25,7 @@ const getPoductSchemas = {
   handler: getproductsHandler,
 };
 
-const getOnePoductSchemas = {
+const getOneProductSchemas = {
   schema: {
     tags:['Products'],
     params:{
@@ -46,7 +46,7 @@ const getOnePoductSchemas = {
 
 
 export default function productRotues(fastify,options,done){
-  fastify.get("/", getPoductSchemas);
-  fastify.get("/:id", getOnePoductSchemas);
+  fastify.get("/", getProductSchemas);
+  fastify.get("/:id", getOneProductSchemas);
   done()
 }
