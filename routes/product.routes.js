@@ -14,10 +14,11 @@ const product = {
 };
 const getPoductSchemas = {
   schema: {
+    tags:['Products'],
     response: {
       200: {
         type: "array",
-        product,
+        items:product.items
       },
     },
   },
@@ -26,6 +27,16 @@ const getPoductSchemas = {
 
 const getOnePoductSchemas = {
   schema: {
+    tags:['Products'],
+    params:{
+      type:'object',
+      properties:{
+        id:{
+          type: "string",
+          description:" Id of product"
+        }
+      }
+    },
     responses: {
       200: product,
     },
