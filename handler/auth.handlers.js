@@ -24,8 +24,16 @@ export const loginHandler = async(req,reply)=>{
         message:"User doesn't exist"})
     if(!await fastify.bcrypt.compare(password,user.password)) return reply.status(401).send({statusCode:401,
         message:"Username & Password is inccorect"})
-    
+    const token = fastify.jwt.sign({
+        id: user.id,
+        user:user.username,
+    },{
+        expiresIn:"1m"
+    })
+    user.accessToken = token
+    await user.save()
     return reply.send({
-        message: "you have successfully logged in"
+        message: "you have successfully logged in",
+        accessToken:token
     })
 }

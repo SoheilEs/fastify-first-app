@@ -29,7 +29,11 @@ import { sequelize } from "../../config/connectToDb.js";
 //     },
 //     birthday:{
 //         type: DataTypes.DATE,
-//     }
+//     },
+//     accessToken:{
+//          type: DataTypes.STRING,
+//          defaultValue:""
+//      }
 // }
 
 // export const UserModel = sequelize.models.User || sequelize.define('User',userSchema)
@@ -65,12 +69,17 @@ User.init({
     },
     birthday:{
         type: DataTypes.DATE,
+    },
+    accessToken:{
+        type: DataTypes.STRING,
+        defaultValue:""
     }
 },{
     sequelize,
     modelName:'User'
 })
 
+// User.sync({force:true,alter:true})
 
 
 

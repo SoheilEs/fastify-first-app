@@ -46,6 +46,7 @@ const getOneProductSchemas = {
 
 
 export default function productRotues(fastify,options,done){
+  fastify.addHook("onRequest",async request=> await request.jwtVerify())
   fastify.get("/", getProductSchemas);
   fastify.get("/:id", getOneProductSchemas);
   done()
