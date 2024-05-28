@@ -13,7 +13,11 @@
   "dependencies": {
     "@fastify/swagger": "^8.14.0",
     "@fastify/swagger-ui": "^3.0.0",
-    "fastify": "^4.27.0"
+    "fastify": "^4.27.0",
+    "fastify-bcrypt": "^1.0.1",
+    "pg": "^8.11.5",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.37.3"
   },
   "type": "module"
 }
