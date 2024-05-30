@@ -1,7 +1,8 @@
 import { products } from "../db/products.js";
 
 export const getproductsHandler = (req, reply) => {
-    return reply.send(products);
+    console.log(req.user);
+    return reply.send({products,user:req.user});
   }
 
 export const getOneProductHandler = (req, reply) => {

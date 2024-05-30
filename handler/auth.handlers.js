@@ -28,7 +28,7 @@ export const loginHandler = async(req,reply)=>{
         id: user.id,
         user:user.username,
     },{
-        expiresIn:"1m"
+        expiresIn: '1h'
     })
     user.accessToken = token
     await user.save()

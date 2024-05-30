@@ -2,6 +2,7 @@ import {
   getOneProductHandler,
   getproductsHandler,
 } from "../handler/product.handlers.js";
+import { GetUserMiddleware } from "../utils/getUser.js";
 
 const product = {
   items: {
@@ -9,6 +10,7 @@ const product = {
     properties: {
       id: { type: "integer" },
       title: { type: "string" },
+      user:{type:"string"}
     },
   },
 };
@@ -17,11 +19,29 @@ const getProductSchemas = {
     tags:['Products'],
     response: {
       200: {
-        type: "array",
-        items:product.items
+        type: "object",
+        properties:{
+          products:{
+            type:"array",
+            items: product.items
+          },
+          user:{
+            type: "object",
+            properties:{
+              id:{type:"number"},
+              first_name:{type:"string"},
+              last_name:{type:"string"},
+              username:{type:"string"},
+              accessToken:{type:"string"},
+
+            }
+          }
+        }
+  
       },
     },
   },
+  preHandler: [GetUserMiddleware],
   handler: getproductsHandler,
 };
 
@@ -41,12 +61,13 @@ const getOneProductSchemas = {
       200: product,
     },
   },
+  preHandler: [GetUserMiddleware],
   handler: getOneProductHandler,
 };
 
 
 export default function productRotues(fastify,options,done){
-  fastify.addHook("onRequest",async request=> await request.jwtVerify())
+  // fastify.addHook("onRequest",async request => await request.jwtVerify())
   fastify.get("/", getProductSchemas);
   fastify.get("/:id", getOneProductSchemas);
   done()

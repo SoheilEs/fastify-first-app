@@ -14,6 +14,8 @@ import fastifyExpress from "@fastify/express";
 import cors from "cors"
 import fastifyMiddie from "@fastify/middie";
 import serveStatic from "serve-static";
+import profileRotues from "./routes/profile.routes.js";
+import categoryRoutes from "./routes/category.routes.js";
 const __dirname = dirname(fileURLToPath(import.meta.url))
 export const fastify = Fastify({
   logger: true,
@@ -35,16 +37,19 @@ fastify.use((req,res,next)=>{
   console.log("Hello middleware");
   next()
 })
-console.log("====",__dirname);
+
 fastify.use("/",serveStatic(path.join(__dirname,"public")))
-fastify.register(indexRotues)
-fastify.register(productRotues,{prefix:"products"})
 fastify.register(authRotues,{prefix:"auth"})
+fastify.register(profileRotues,{prefix:"profile"})
+fastify.register(indexRotues)
+fastify.register(categoryRoutes,{prefix:"category"})
+fastify.register(productRotues,{prefix:"products"})
 
   
     
     await fastify.listen({ port: 3000 });
   } catch (error) {
+
     fastify.log.error(error);
     process.exit(1);
   }
